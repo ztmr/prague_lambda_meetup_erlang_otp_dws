@@ -1,0 +1,37 @@
+%% -*- Erlang -*-
+AppStr = "dws",
+AppAtom = list_to_atom (AppStr),
+Deps = [crypto, asn1, lager, cowboy, mnesia, AppAtom],
+Vsn = rebar_vsn_plugin:make_vsn (),
+
+Sys = [
+    {lib_dirs, ["../apps", "../deps"]},
+    {erts, [{mod_cond, derived}, {app_file, strip}]},
+    {app_file, strip},
+    {rel, AppStr, Vsn, [kernel, stdlib, sasl | Deps]},
+    {rel, "start_clean", "", [kernel, stdlib]},
+    {boot_rel, AppStr},
+    {profile, embedded},
+    {incl_cond, derived},
+    {mod_cond, derived},
+    {excl_archive_filters, [".*"]}, %% Do not archive built libs
+    {excl_sys_filters, ["^bin/.*", "^erts.*/bin/(dialyzer|typer)",
+                        "^erts.*/(doc|info|include|lib|man|src)"]},
+    {excl_app_filters, ["\.gitignore"]},
+    {app, AppAtom, [{mod_cond, app}, {incl_cond, include}]}
+  ],
+Overlays = [
+    {mkdir, "log/sasl"},
+    {copy, "files/erl", "\{\{erts_vsn\}\}/bin/erl"},
+    {copy, "files/nodetool", "\{\{erts_vsn\}\}/bin/nodetool"},
+    {copy, "files/dws", "bin/dws"},
+    {copy, "files/dws.cmd", "bin/dws.cmd"},
+    {copy, "files/start_erl.cmd", "bin/start_erl.cmd"},
+    {copy, "files/install_upgrade.escript", "bin/install_upgrade.escript"},
+    {template, "files/sys.config", "releases/\{\{rel_vsn\}\}/sys.config"},
+    {template, "files/vm.args", "releases/\{\{rel_vsn\}\}/vm.args"}
+  ],
+[{sys, Sys},
+ {target_dir, AppStr},
+ {overlay_vars, "vars.config"},
+ {overlay, Overlays}].
