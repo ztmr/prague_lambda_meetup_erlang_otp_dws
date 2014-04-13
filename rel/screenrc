@@ -1,0 +1,27 @@
+activity 'Activity in window %n'
+encoding UTF-8 iso8859-2
+login on
+utf8 on
+autodetach on
+defscrollback 10000
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+startup_message off
+vbell on
+
+bindkey -k k1 select 0
+bindkey -k k2 select 1
+bindkey -k k3 select 2
+bindkey -k k4 select 3
+bindkey -k k5 select 4
+bindkey -k k6 select 5
+bindkey -k k7 select 6
+bindkey -k k8 select 7
+bindkey -k k9 select 8
+bindkey -k k0 select 9
+monitor
+hardstatus alwayslastline
+hardstatus string '%{= bW}%-Lw%{= KY}%50>%n%f* %t%{= bW}%+Lw%< %{= kR}%-=%D %d %M %Y %c:%s%{-}'
+
+termcapinfo xterm*|rxvt* ti@:te@
+termcapinfo xterm*|rxvt* OL=10000
+
