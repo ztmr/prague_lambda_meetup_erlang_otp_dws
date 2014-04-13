@@ -1,8 +1,9 @@
 %% -*- Erlang -*-
-AppStr = "dws",
-AppAtom = list_to_atom (AppStr),
+{ok, [{application, AppAtom, AppSpec}]} = file:consult ("../apps/dws/ebin/dws.app"),
+AppStr = atom_to_list (AppAtom),
+Vsn = proplists:get_value (vsn, AppSpec),
+%Deps0 = proplists:get_value (vsn, AppSpec),
 Deps = [crypto, asn1, lager, cowboy, mnesia, AppAtom],
-Vsn = rebar_vsn_plugin:make_vsn (),
 
 Sys = [
     {lib_dirs, ["../apps", "../deps"]},
