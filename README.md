@@ -30,3 +30,11 @@ ERROR: OTP release R15B does not match required regex 17
 ```
 ...you need to upgrade your Erlang/OTP to 17.0+.
 
+TODO
+----
+- implement a basic chat protocol on the top of the
+  `dws_websocket_handler`
+- turn the `dws_session` into a regular `gen_server`
+- add an automatic session auto-wiping mechanism using
+  the `erlang:start_timer/3` and `dws_session` server's `handle_info`
+
