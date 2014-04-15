@@ -1,5 +1,21 @@
 %% -*- Erlang -*-
-{ok, [{application, AppAtom, AppSpec}]} = file:consult ("../apps/dws/ebin/dws.app"),
+
+%% This is to autodetect the .app file if it exists
+%% and to use at least the .app.src if the application
+%% is not compiled (rebar clean)
+BinAppFile = "../apps/dws/ebin/dws.app",
+SrcAppFile = "../apps/dws/src/dws.app.src",
+
+{ok, AppAtom, AppSpec} =
+  lists:foldl (fun (File, Acc) ->
+                       case file:consult (File) of
+                           {ok, [{application, AppAtom, AppSpec}]} ->
+                               {ok, AppAtom, AppSpec};
+                           _Whatever -> Acc
+                       end
+               end,
+               error, [BinAppFile, SrcAppFile]),
+
 AppStr = atom_to_list (AppAtom),
 Vsn = proplists:get_value (vsn, AppSpec),
 %Deps0 = proplists:get_value (vsn, AppSpec),
