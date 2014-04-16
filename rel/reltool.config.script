@@ -5,6 +5,12 @@
 %% is not compiled (rebar clean)
 BinAppFile = "../apps/dws/ebin/dws.app",
 SrcAppFile = "../apps/dws/src/dws.app.src",
+VsnPluginDirs = [
+  "../deps/rebar_vsn_plugin/ebin", %% for dev node releases
+  "../deps/rebar_vsn_plugin/src"   %% for all the other releases
+],
+code:add_paths (VsnPluginDirs),
+%io:format ("===> VSN: ~ts~n", [rebar_vsn_plugin:make_vsn ()]),
 
 {ok, AppAtom, AppSpec} =
   lists:foldl (fun (File, Acc) ->
@@ -17,7 +23,8 @@ SrcAppFile = "../apps/dws/src/dws.app.src",
                error, [BinAppFile, SrcAppFile]),
 
 AppStr = atom_to_list (AppAtom),
-Vsn = proplists:get_value (vsn, AppSpec),
+%Vsn = proplists:get_value (vsn, AppSpec),
+Vsn = (catch (rebar_vsn_plugin:make_vsn ())),
 %Deps0 = proplists:get_value (vsn, AppSpec),
 Deps = [crypto, asn1, lager, cowboy, mnesia, AppAtom],
 
