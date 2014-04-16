@@ -32,9 +32,12 @@ ERROR: OTP release R15B does not match required regex 17
 
 TODO
 ----
-- implement a basic chat protocol on the top of the
-  `dws_websocket_handler`
-- turn the `dws_session` into a regular `gen_server`
-- add an automatic session auto-wiping mechanism using
-  the `erlang:start_timer/3` and `dws_session` server's `handle_info`
+- implement a nice D3.js powered OTP processes visualisation
+  (using the `DWS.Example.get_system_processes`)
+  and Mnesia statistics (using the `DWS.Example.get_mnesia_info`)
+- implement a nice WebChat demo:
+  - `dws_service_chat` backend
+  - a React.js based frontend
+- add a way to "upgrade" the communication protocol to BERT
+  or MsgPack, since the JSON is evil. What about WAMPv2?
 
