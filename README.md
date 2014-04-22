@@ -7,6 +7,7 @@ Erlang/OTP demo project to show:
 - Erlang cluster
 - Erlang maps datatype
 - Mnesia
+- Crash-aware ETS tables
 
 Usage
 -----
