@@ -33,6 +33,7 @@ ERROR: OTP release R15B does not match required regex 17
 
 TODO
 ----
+- automatized JavaScript proxy class generator
 - implement a nice D3.js powered OTP processes visualisation
   (using the `DWS.Example.get_system_processes`)
   and Mnesia statistics (using the `DWS.Example.get_mnesia_info`)
