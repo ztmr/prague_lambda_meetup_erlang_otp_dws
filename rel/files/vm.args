@@ -6,19 +6,24 @@
 
 ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
 ## (Disabled by default..use with caution!)
+##
+## We don't need to set HEART_COMMAND since `start' and `start_boot' will
+## export such a environment variable automagically.
+## Note that `console' won't!
 -heart
-#-env HEART_BEAT_TIMEOUT 30
-#-env HEART_COMMAND './init.sh start'
 
-# Avoid an accidental application stopping from operator's console
+## Avoid an accidental application stopping from operator's console
 #+Bi -stdlib restricted_shell restricted_shell
 
+## Printable Characters --> Unicode instead of Latin1
++pc unicode
+
 ## Enable kernel poll and a few async threads
-##+K true
-##+A 5
+#+K true
+#+A 5
 
 ## Increase number of concurrent ports/sockets
-##-env ERL_MAX_PORTS 4096
+#-env ERL_MAX_PORTS 4096
 
 ## Tweak GC to run more often
-##-env ERL_FULLSWEEP_AFTER 10
+#-env ERL_FULLSWEEP_AFTER 10
