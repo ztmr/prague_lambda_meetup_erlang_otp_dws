@@ -31,6 +31,11 @@ ERROR: OTP release R15B does not match required regex 17
 ```
 ...you need to upgrade your Erlang/OTP to 17.0+.
 
+Also, we don't recommend to use service `on_load` together
+with `dws_broker_handlers` configuration option since it
+may interfere each other.
+The `on_load` is actually the better way of doing the job.
+
 TODO
 ----
 - automatized JavaScript proxy class generator
