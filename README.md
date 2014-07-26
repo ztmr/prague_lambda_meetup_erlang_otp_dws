@@ -47,4 +47,7 @@ TODO
   - a React.js based frontend
 - add a way to "upgrade" the communication protocol to BERT
   or MsgPack, since the JSON is evil. What about WAMPv2?
+- write a better JavaScript client library
+- add support for bi-directional streaming (useful for file
+  transfers) and for EventSource-like server->client notifications
 
