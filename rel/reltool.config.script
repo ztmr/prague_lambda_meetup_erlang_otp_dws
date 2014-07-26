@@ -26,7 +26,7 @@ AppStr = atom_to_list (AppAtom),
 %Vsn = proplists:get_value (vsn, AppSpec),
 Vsn = (catch (rebar_vsn_plugin:make_vsn ())),
 %Deps0 = proplists:get_value (vsn, AppSpec),
-Deps = [crypto, asn1, lager, cowboy, mnesia, AppAtom],
+Deps = [crypto, asn1, lager, cowboy, mnesia, msgpack, AppAtom],
 
 Sys = [
     {lib_dirs, ["../apps", "../deps"]},
